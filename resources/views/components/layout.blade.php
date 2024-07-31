@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="https://rsms.me/inter/inter.css">
     <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/alpinejs" defer></script>
-    <title>About Page</title>
+    <title>Web makan gratis</title>
 </head>
 
 <body class="h-full bg-gray-600 text-white dark:bg-gray-900 dark:text-white"">

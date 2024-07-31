@@ -23,6 +23,11 @@ class UserFactory extends Factory
      */
     public function definition(): array
     {
+        // di bawah ini adalah pengecekan null
+        // $a = $a ? $a : $b; Ternary Operator
+        // $a = $a ?: $b; Elvis Operator
+        // $a ??= $b; null coalescing operator
+
         return [
             'name' => fake()->name(),
             'email' => fake()->unique()->safeEmail(),
@@ -39,6 +44,13 @@ class UserFactory extends Factory
     {
         return $this->state(fn (array $attributes) => [
             'email_verified_at' => null,
+        ]);
+    }
+
+    public function admin(): static
+    {
+        return $this->state(fn (array $attributes) => [
+            'is_admin' => true,
         ]);
     }
 }

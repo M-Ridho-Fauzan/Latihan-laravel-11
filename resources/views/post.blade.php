@@ -8,15 +8,21 @@
                 {{ $post['title'] }}</h2>
             <small class="text-gray-400">
                 <span>
-                    <a href="/posts/{{ $post['id'] }}">{{ $post['author'] }}</a>
-                    | 30 Agust 2022
+                    <a href="/authors/{{ $post->author->id }}">{{ $post->author->name }}</a>
+                    | {{ $post->created_at->format('j F Y - H:i A') }}
                 </span>
             </small>
             <hr>
+            <small class="text-gray-400 text-1xl">
+                <span>
+                    Updated: {{ $post->created_at->diffForHumans() }}
+                </span>
+            </small>
             <div class="my-8 font-light">
                 {!! $post['body'] !!}
             </div>
-            <a class="hover:text-blue-500 hover:underline" href="/posts"> &laquo;... Back To All blog</a>
+            <a class="hover:text-blue-500 hover:underline" href="javascript:history.back()"> &laquo;... Back To All
+                blog</a>
         </article>
     </div>
 
