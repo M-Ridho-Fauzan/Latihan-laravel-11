@@ -6,10 +6,15 @@
         <article class="py-3 max-w-screen-md border-b border-gray-500" tabindex="0">
             <h2 class="mb-1 text-2xl tracking-tight font-bold text-gray-300">
                 {{ $post['title'] }}</h2>
-            <small class="text-gray-400">
+            <small class="">
                 <span>
-                    <a href="/authors/{{ $post->author->id }}">{{ $post->author->name }}</a>
-                    | {{ $post->created_at->format('j F Y - H:i A') }}
+                    By.
+                    <a class="hover:underline hover:text-white text-gray-400"
+                        href="/authors/{{ $post->author->username }}">{{ $post->author->name }}</a>
+                    In
+                    <a class="hover:underline hover:text-white text-gray-400"
+                        href="/categories/{{ $post->category->slug }}">{{ $post->category->name }}</a>
+                    | {{ $post->created_at->format('j F Y - h:i A') }}
                 </span>
             </small>
             <hr>

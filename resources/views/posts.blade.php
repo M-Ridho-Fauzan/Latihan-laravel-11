@@ -9,10 +9,14 @@
                     <h2 class="mb-1 text-2xl tracking-tight font-bold text-gray-300 hover:text-gray-200">
                         {{ $post['title'] }}</h2>
                 </a>
-                <small class="text-gray-400">
+                <small class="">
                     <span>
-                        <a class="hover:underline hover:text-white"
-                            href="/authors/{{ $post->author->id }}">{{ $post->author->name }}</a>
+                        By.
+                        <a class="hover:underline hover:text-white text-gray-400"
+                            href="/authors/{{ $post->author->username }}">{{ $post->author->name }}</a>
+                        In
+                        <a class="hover:underline hover:text-white text-gray-400"
+                            href="/categories/{{ $post->category->slug }}">{{ $post->category->name }}</a>
                         | {{ $post->created_at->format('j F Y - h:i A') }}
                     </span>
                 </small>

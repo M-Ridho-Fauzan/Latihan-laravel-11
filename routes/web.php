@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Category;
 use App\Models\Post;
 use App\Models\User;
 use Illuminate\Support\Arr;
@@ -19,9 +20,16 @@ Route::get('/about', function () {
 });
 
 Route::get('/posts', function () {
+    // lazy loading itu akan mengquery 1 data terus secara berulang2, dan itu mengakibatkan lemot
+    // #Coba lihat di App\Models\Posts.php
+    // tetapi bisa juga gunakan bigger loading secara default, jadi penulisan di bawah ini tidak di perlukan
+    $posts = Post::with(['author', 'category'])->latest()->get(); // with bigger loading, kebalikan dari lazy loading
+    // $posts = Post::all(); // lazy loading
+
+
     return view('posts', [
         'pageTitle' => 'Blog',
-        'posts' => Post::all()
+        'posts' => $posts
     ]);
 });
 
@@ -34,10 +42,30 @@ Route::get('/posts/{post:slug}', function (Post $post) {
     ]);
 });
 
-Route::get('/authors/{user}', function (User $user) {
+Route::get('/authors/{user:username}', function (User $user) {
+    // lazy loading itu akan mengquery 1 data terus secara berulang2, dan itu mengakibatkan lemot
+    // #Coba lihat di App\Models\Posts.php
+    // tetapi bisa juga gunakan bigger loading secara default, jadi penulisan di bawah ini tidak di perlukan
+    $posts = $user->posts->load('category', 'author'); // With Lazy Bigger Loading
+    // $posts = $category->posts; // lazy loading
+
     return view('posts', [
-        'pageTitle' => 'blog by: ' . $user->name,
-        'posts' => $user->posts
+        'pageTitle' => count($posts) . ' Article by: ' . $user->name,
+        'posts' => $posts
+    ]);
+});
+
+Route::get('/categories/{category:slug}', function (Category $category) {
+    // lazy loading itu akan mengquery 1 data terus secara berulang2, dan itu mengakibatkan lemot
+    // #Coba lihat di App\Models\Posts.php
+    // tetapi bisa juga gunakan bigger loading secara default, jadi penulisan di bawah ini tidak di perlukan
+    $posts = $category->posts->load('category', 'author');; // With Lazy Bigger Loading
+    // $posts = $category->posts; // lazy loading
+
+
+    return view('posts', [
+        'pageTitle' => count($posts) . ' Article In Category: ' . $category->name,
+        'posts' => $posts
     ]);
 });
 

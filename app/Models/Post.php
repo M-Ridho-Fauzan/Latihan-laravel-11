@@ -16,10 +16,17 @@ class Post extends Model
     protected $fillable = ['title', 'author', 'slug', 'body'];
     protected $guarded = ['id', 'created_at', 'updated_at'];
 
+    protected $with = ['author', 'category']; // atau bisa denga bigger loading by default
+
     // Penghubung 2 table
     public function author(): BelongsTo
     {
         return $this->belongsTo(User::class, 'author_id');
+    }
+
+    public function category(): BelongsTo
+    {
+        return $this->belongsTo(Category::class);
     }
 
     // public static function all()
