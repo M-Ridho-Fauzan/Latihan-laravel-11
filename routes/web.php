@@ -23,9 +23,11 @@ Route::get('/posts', function () {
     // lazy loading itu akan mengquery 1 data terus secara berulang2, dan itu mengakibatkan lemot
     // #Coba lihat di App\Models\Posts.php
     // tetapi bisa juga gunakan bigger loading secara default, jadi penulisan di bawah ini tidak di perlukan
-    $posts = Post::with(['author', 'category'])->latest()->get(); // with bigger loading, kebalikan dari lazy loading
+    // $posts = Post::with(['author', 'category'])->latest(); // with bigger loading, kebalikan dari lazy loading
     // $posts = Post::all(); // lazy loading
 
+    $posts = Post::filter(request(['search', 'category', 'author']))
+        ->latest()->paginate(6)->withQueryString();
 
     return view('posts', [
         'pageTitle' => 'Blog',

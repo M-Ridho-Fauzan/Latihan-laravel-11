@@ -24,6 +24,7 @@ class PostFactory extends Factory
         // ['title', 'author', 'slug', 'body'];
         return [
             'title' => $title = fake()->sentence(),
+            'image' => 'https://picsum.photos/id/' . fake()->randomNumber(2, true) . '/700/500',
             'author_id' => User::factory(),
             'category_id' => Category::factory(),
             'slug' => Str::slug($title),

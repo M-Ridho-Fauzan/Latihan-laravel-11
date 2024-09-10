@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('slug')->unique();
             $table->string('title');
+            $table->string('image');
             $table->foreignId('author_id')->constrained(
                 table: 'users',
                 indexName: 'posts_aurhor_id'

@@ -27,9 +27,9 @@ class UserFactory extends Factory
         // $a = $a ? $a : $b; Ternary Operator
         // $a = $a ?: $b; Elvis Operator
         // $a ??= $b; null coalescing operator
-
         return [
             'name' => fake()->name(),
+            'image' => 'https://picsum.photos/id/' . fake()->randomNumber(2, true) . '/200/300',
             'username' => fake()->unique()->username(),
             'email' => fake()->unique()->safeEmail(),
             'email_verified_at' => now(),
